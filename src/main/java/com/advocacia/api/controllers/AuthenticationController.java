@@ -8,6 +8,7 @@ import com.advocacia.api.domain.user.UserDTO;
 
 import jakarta.validation.Valid;
 
+import java.time.Duration;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseCookie;
 
 
 @RestController
@@ -39,8 +42,29 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+//    @PostMapping("/login")
+//    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
+//        UserDetails userDetails = repository.findByLogin(data.login());
+//
+//        if (userDetails == null) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+//        }
+//
+//        if (!passwordEncoder.matches(data.password(), userDetails.getPassword())) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha Incorreta!");
+//        }
+//
+//        var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
+//        var auth = this.authenticationManager.authenticate(usernamePassword);
+//
+//        var token = tokenService.generateToken((User) auth.getPrincipal());
+//
+//        return ResponseEntity.ok(new LoginResponseDTO(userDetails.getUsername(), userDetails.getAuthorities().toString(), token));
+//    }
+
+
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
+    public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO data, HttpServletResponse response) {
         UserDetails userDetails = repository.findByLogin(data.login());
 
         if (userDetails == null) {
@@ -56,8 +80,21 @@ public class AuthenticationController {
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
+        // Configuração do Cookie com o token JWT
+        var cookie = ResponseCookie.from("auth-token", token)
+                .httpOnly(false)                // Permite acesso via JavaScript (essencial para CSRF)
+                .secure(true)                   // Requer HTTPS
+                .path("/")                      // Disponível para toda a API
+                .sameSite("None")               // Permite envio cross-site (necessário para CSRF)
+                .maxAge(Duration.ofHours(1))    // Tempo de expiração do cookie
+                .build();
+
+        // Adiciona o cookie à resposta
+        response.addHeader("Set-Cookie", cookie.toString());
+
         return ResponseEntity.ok(new LoginResponseDTO(userDetails.getUsername(), userDetails.getAuthorities().toString(), token));
     }
+
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){

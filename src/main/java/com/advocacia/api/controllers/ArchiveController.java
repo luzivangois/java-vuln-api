@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/archive")
+@RequestMapping("/api")
 public class ArchiveController {
 
     final IArchiveService archiveService;

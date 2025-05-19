@@ -2,9 +2,14 @@
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
 Este projeto foi criado com vulnerabilidades para uso em laboratório como back-end e rodar localmente
+
+## Instalação
+* VSCode ou outra IDE que rode Java
+* Java 17 ou 21
+* Dependências existentes no pom.xml
+* Postman ou Insomnia (ou ferramenta similar) - Para interagir com a API
 
 ## Instalação
 
@@ -14,34 +19,30 @@ Este projeto foi criado com vulnerabilidades para uso em laboratório como back-
 git clone https://github.com/luzivangois/java-vuln-api.git
 ```
 
-2. Instale as dependencias com Maven
+2. Start a API executando o arquivo JavaVulnAppForumApplication.java
+> A API pode ser acessada em http://localhost:8080
 
-## Uso
-
-1. Start a aplicação com Maven
-2. A API pode ser acessada em http://localhost:8080
-
-
-## Endpoints da API
+3. Endpoints da API
 A API prover os seguintes endpoints:
 
 ```markdown
-POST /auth/register - Criar novo usuário
+POST /api/register - Criar novo usuário
 
-POST /auth/login - Logar na aplicação.
+POST /api/login - Logar na aplicação.
 
-GET /auth/allusers - Consultador todos os usuários
+GET /api/allusers - Consultador todos os usuários
 
-GET /auth/userid/{id} - Consultar usuário por ID
+GET /api/userid/{id} - Consultar usuário por ID
 
-GET /auth/updatepass - Atualizar senha do usuário
+GET /api/updatepass - Atualizar senha do usuário
 
-GET /auth/deluser/{id} - Deletar usuário por ID
+GET /api/deluser/{id} - Deletar usuário por ID
 
-POST /archive/sendfile - Salvar arquivo
+POST /api/sendfile - Salvar arquivo
 
-GET /archive/name - Ler conteúdo do arquivo
+GET /api/name - Ler conteúdo do arquivo
 ```
+> Os endpoints disponibilizados pela API podem ser acessados utilizando-se a collection existente em /java-vuln-api-forum/tree/main/src/main/resources
 
 ## Autenticação
 A API utiliza Spring Security para controlar a autenticação, conforme as permissões a seguir:

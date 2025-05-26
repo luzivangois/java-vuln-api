@@ -7,7 +7,7 @@ Este projeto foi criado com vulnerabilidades para uso em laboratório como back-
 
 ## Instalação
 * VSCode ou outra IDE que rode Java
-* Java 17 ou 21
+* Java 17
 * Dependências existentes no pom.xml
 * Postman ou Insomnia (ou ferramenta similar) - Para interagir com a API
 

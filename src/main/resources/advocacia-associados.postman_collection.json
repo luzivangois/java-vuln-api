@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "3c88fc6e-cf2e-4100-8fa1-3c210ec96472",
+		"_postman_id": "c5babeb0-1131-4e1a-887d-9e36e36feddb",
 		"name": "advocacia-associados",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27560622"
 	},
 	"item": [
@@ -23,7 +23,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/auth/register"
+						"url": {
+							"raw": "http://localhost:8080/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"register"
+							]
+						}
 					},
 					"response": []
 				},
@@ -41,7 +52,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/auth/login"
+						"url": {
+							"raw": "http://localhost:8080/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
@@ -50,13 +72,28 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": ""
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/auth/allusers"
+						"url": {
+							"raw": "http://localhost:8080/api/allusers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"allusers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -65,13 +102,29 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": ""
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/auth/userid/{id}"
+						"url": {
+							"raw": "http://localhost:8080/api/userid/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"userid",
+								"{id}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -80,22 +133,38 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": ""
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"usuario\",\r\n    \"login\": \"usuario\",\r\n    \"password\": \"senha\"\r\n}",
+							"raw": "{\r\n    \"password\": \"senha\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/auth/updatepass"
+						"url": {
+							"raw": "http://localhost:8080/api/updatepass/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"updatepass",
+								"{id}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -104,13 +173,29 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": ""
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/auth/deluser/{id}"
+						"url": {
+							"raw": "http://localhost:8080/api/deluser/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"deluser",
+								"{id}"
+							]
+						}
 					},
 					"response": []
 				}
@@ -124,9 +209,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": ""
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -145,7 +234,18 @@
 								}
 							]
 						},
-						"url": "http://localhost:8080/archive/sendfile"
+						"url": {
+							"raw": "http://localhost:8080/api/sendfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sendfile"
+							]
+						}
 					},
 					"response": []
 				},
@@ -157,9 +257,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": ""
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -173,7 +277,18 @@
 								}
 							]
 						},
-						"url": "http://localhost:8080/archive/name"
+						"url": {
+							"raw": "http://localhost:8080/archive/name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"archive",
+								"name"
+							]
+						}
 					},
 					"response": []
 				}

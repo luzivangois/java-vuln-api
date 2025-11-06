@@ -11,7 +11,7 @@ COPY src src
 
 RUN mvn package -DskipTests
 
-FROM openjdk:17
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 

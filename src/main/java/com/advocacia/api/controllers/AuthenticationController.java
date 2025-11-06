@@ -6,6 +6,8 @@ import com.advocacia.api.repositories.UserRepository;
 import com.advocacia.api.services.IUserService;
 import com.advocacia.api.domain.user.UserDTO;
 
+import java.util.Optional;
+
 import jakarta.validation.Valid;
 
 import java.util.*;
@@ -41,14 +43,19 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
-        UserDetails userDetails = repository.findByLogin(data.login());
+        Optional<User> userOpt = repository.findUserByLogin(data.login());
 
-        if (userDetails == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+        if (userOpt.isEmpty()) {
+            LoginErrorDTO error = new LoginErrorDTO("Usuário não encontrado", null, null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
 
+        User user = userOpt.get();
+        UserDetails userDetails = (UserDetails) user;
+
         if (!passwordEncoder.matches(data.password(), userDetails.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha Incorreta!");
+            LoginErrorDTO error = new LoginErrorDTO("Senha Incorreta!", user.getId(), user.isEnabled());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
         }
 
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
